@@ -1,0 +1,118 @@
+<!--
+* Author: Gishan Don Ranasinghe
+* Organisation: University of Cambridge
+!-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>IfM Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      #map {
+        height: 100%;
+      }
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      var map;
+      
+      var markerLabel = 'IfM IoT';
+
+      function initMap() {
+        var largeMarkerIcon = {
+          url: 'marker-ifm-iot.png',
+          scaledSize: new google.maps.Size(280, 280),
+          origin: new google.maps.Point(0, 0),
+          anchor: new google.maps.Point(140,360),
+        };
+        var plantRoomMarkerIcon = {
+          url: 'marker-plant-room-iot.png',
+          scaledSize: new google.maps.Size(280, 280),
+          origin: new google.maps.Point(0, 0),
+          anchor: new google.maps.Point(140,360),
+        };
+        var workshopMarkerIcon = {
+          url: 'marker-workshop-iot.png',
+          scaledSize: new google.maps.Size(280, 280),
+          origin: new google.maps.Point(0, 0),
+          anchor: new google.maps.Point(140,360),
+        };
+        var roomConditionMarkerIcon = {
+          url: 'marker-rooms-iot.png',
+          scaledSize: new google.maps.Size(280, 280),
+          origin: new google.maps.Point(0, 0),
+          anchor: new google.maps.Point(140,360),
+        };
+        var energyModelsMarkerIcon = {
+          url: 'marker-energy-models.png',
+          scaledSize: new google.maps.Size(280, 280),
+          origin: new google.maps.Point(0, 0),
+          anchor: new google.maps.Point(140,360),
+        };
+
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 52.2095, lng: 0.087387},
+          zoom: 18,
+          mapTypeId: google.maps.MapTypeId.SATELLITE,
+          disableDefaultUI: true
+        });
+
+        var marker = new google.maps.Marker({
+          position: {lat: 52.2095, lng: 0.087387},
+          map: map,
+          animation: google.maps.Animation.BOUNCE,
+          icon: largeMarkerIcon
+        });
+
+        marker.addListener('click', function() {
+          map.setZoom(20);
+          map.setCenter(marker.getPosition());
+          marker.setMap(null);
+          
+          var plantroomMarker = new google.maps.Marker({
+            position: {lat: 52.2093, lng: 0.08732},
+            map: map,
+            icon: plantRoomMarkerIcon
+          });
+
+          plantroomMarker.addListener('click', function() {
+            window.location.href = 'pumps.html'
+          });
+
+          var workshopMarker = new google.maps.Marker({
+            position: {lat: 52.2093, lng: 0.0870},
+            map: map,
+            icon: workshopMarkerIcon
+          });
+
+          workshopMarker.addListener('click', function() {
+            //window.location.href = 'file:///Users/gishandonranasinghe/GoogleDrive/CambridgeUniversity/PhD/research/dbb/dashboards/cnc-dashboard/cnc.html'
+          });
+        
+          var roomConditionMarker = new google.maps.Marker({
+            position: {lat: 52.2096, lng: 0.08765},
+            map: map,
+            icon: roomConditionMarkerIcon
+          });
+
+           var energyModelsMarker = new google.maps.Marker({
+            position: {lat: 52.20925, lng: 0.08762},
+            map: map,
+            icon: energyModelsMarkerIcon
+          });
+        });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcN3GjY-zpQqDKis7TBomBaE_11DGS9ZE&callback=initMap"
+    async defer></script>
+  </body>
+</html>
